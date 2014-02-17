@@ -1,0 +1,24 @@
+/* 
+    Document   : base
+    Created on : 2012-3-26, 14:20:52
+    Author     : t2s
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+table.table {
+    border-left: 1px solid #AAAAFF;
+    border-top: 1px solid #AAAAFF;
+}
+.table .title {text-align: center; background: #EEE;}
+.table td, .table th {
+    border-bottom: 1px solid #AAAAFF;
+    border-right: 1px solid #AAAAFF;
+    padding: 3px 5px;
+}
+a {padding: 2px;}
+
+label {display: block; margin-top: 5px;}
+.error { border: #D00 1px solid;}
+label.error {border:none; display: inline; color: #D00;}
+

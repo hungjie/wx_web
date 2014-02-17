@@ -1,0 +1,16 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} /admin/?.*
+RewriteRule ^admin/?([^\.]*)$ admin_c.php/$1 [L,QSA]
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*\.html) tmp/$1
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]*)$ c.php/$1 [L,QSA]
+
+</IfModule>

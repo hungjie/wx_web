@@ -1,0 +1,31 @@
+/* CSS Document */
+* { margin:0; padding: 0; }
+body {
+    font-family:"Lucida Grande", Verdana, Lucida, Arial, Helvetica, "", sans-serif;
+    font-size:14px;
+    line-height: 1.33;
+    background:#D6F0FA; /* #C2E9F8 */
+    color:#545454;
+    text-align: center;
+}
+
+
+img { border: none; }
+
+p { text-indent:2em; }
+.clear { clear:both; }
+
+#header { background:#668; margin-bottom: 10px; }
+
+
+#page { text-align:center; width: 1060px; margin: auto; background: #88A; border: 1px solid #e5e5e5; border-top: 0px;}
+
+#main {
+    text-align: left;
+    width: 100%;
+}
+.wrapper{padding: 10px;}
+
+
+#footer { }
+
