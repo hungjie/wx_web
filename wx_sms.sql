@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `addresses` (
   `address` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id` (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -52,8 +52,8 @@ CREATE TABLE IF NOT EXISTS `meal_list` (
   `count` int(11) NOT NULL DEFAULT '0',
   `price` double(7,2) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+  UNIQUE INDEX `name` (`name` ASC)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
@@ -66,12 +66,29 @@ CREATE TABLE IF NOT EXISTS `user_order` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` varchar(128) NOT NULL,
   `owner` varchar(128) NOT NULL DEFAULT 'hungjie',
-  `time_at` int(11) DEFAULT NULL,
+  `time_at` DATETIME NOT NULL,
   `order_info` text NOT NULL,
   `status` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+  KEY `user_id` (`user_id`),
+  KEY `time_at` (`time_at`)  
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `user_order_detail`
+--
+
+DROP TABLE IF EXISTS `user_order_detail`;
+CREATE TABLE IF NOT EXISTS `user_order_detail` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `time_at` DATETIME NOT NULL,
+  `user_order_id` int(10) unsigned NOT NULL,
+  `meal_name` varchar(128) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `time_at` (`time_at`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -87,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `user_session` (
   `session_value` blob,
   PRIMARY KEY (`id`),
   KEY `msisdn_shortcode` (`msisdn`,`shortcode`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

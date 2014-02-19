@@ -8,7 +8,7 @@
 $info = "";
 $all_total = 0;
 $user_id = $data['user_id'];
-$time_at = $data['time_at'];
+$order_id = $data['order_id'];
 foreach ($data['order'] as $item => $desc) {
     if ($item == 'address' || $item == 'date' || $item == 'id') {
         continue;
@@ -42,7 +42,7 @@ $total_price_html = "<div class='row'><p class='text-right col-xs-12'>合计<str
         
         <form id='form_id' class="form-horizontal" role="form" action="/index/cancel_order" method='post'>
             <input class='hidden' name='user_id' value='<?php echo $user_id; ?>'>
-            <input class='hidden' name='time_at' value='<?php echo $time_at; ?>'>
+            <input class='hidden' name='order_id' value='<?php echo $order_id; ?>'>
             <div class="form-group">
                 <button id="submit_modal" type='submit' class="btn btn-danger">取消订单</button>
             </div>

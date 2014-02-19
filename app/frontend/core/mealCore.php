@@ -21,43 +21,73 @@ class mealCore {
         return $reses;
     }
 
-    function set_cur_order($id, $msisdn, $order, $now){
+    function set_cur_order($id, $msisdn, $order, $now) {
         $db = get_db();
         $db->begin_query();
         $db->__table = 'user_order';
         $encode = json_encode($order);
-        
-        if($id){
-            $db->update(array('order_info'=>$encode), array('id'=>$id));
-            
+
+        if ($id) {
+            $db->update(array('order_info' => $encode), array('id' => $id));
+
             return $id;
         }
+
+        $order_id = $db->insert(array('user_id' => $msisdn, 'order_info' => $encode, 'time_at' => $now));
+
+        $db->__table = 'user_order_detail';
+        foreach ($order as $k => $v) {
+            if ($k == 'date' || $k == 'address' || !is_array($v)) continue;
+            $db->insert(array('user_order_id' =>$order_id, 'meal_name' => $k, 'count' => $v['count'], 'time_at' => $now));
+        }
         
-        $db->insert(array('user_id'=>$msisdn,'order_info'=>$encode,'time_at'=>$now));
+        return $order_id;
     }
-    
-    function get_cur_order($msisdn){
+
+    function get_cur_order($msisdn) {
         $db = get_db();
         $db->begin_query();
-        $res = $db->table('user_order')->where(array('user_id'=>$msisdn, 'status'=>0))
+        $res = $db->table('user_order')->where(array('user_id' => $msisdn, 'status' => 0))
                 ->order_by_desc('id')
                 ->exec();
-        
+
         $reses = array();
-        while($res && $res->next()){
+        while ($res && $res->next()) {
             $order_info = json_decode($res->__data['order_info'], true);
             $order_info['id'] = $res->__data['id'];
             array_push($reses, $order_info);
         }
-        
+
         return $reses;
     }
+
+    function get_meal_detail($day = null){
+        if ($day == null) $timestamp = mktime (0, 0, 0);
+        else $timestamp = 
+        $db = get_db();
+        $db->begin_query();
+        $res = $db->table('user_order')->where(array('user_id' => $msisdn, 'status' => 0))
+                ->order_by_desc('id')
+                ->exec();
+
+    }
     
-    function delete_order($user_id, $time_at){
+        function get_order_detail($day) {
+        $db = get_db();
+        $db->begin_query();
+        $res = $db->table('user_order')->where(array('user_id' => $msisdn, 'status' => 0))
+                ->order_by_desc('id')
+                ->exec();
+
+    }
+    
+
+    function delete_order($user_id, $order_id) {
         $db = get_db();
         $db->begin_query();
         $db->__table = 'user_order';
-        
-        return $db->delete(array('user_id'=>$user_id, 'time_at'=>$time_at));
+
+        return $db->delete(array('user_id' => $user_id, 'order_id' => $order_id));
     }
+
 }

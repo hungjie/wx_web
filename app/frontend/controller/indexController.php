@@ -32,7 +32,7 @@ class indexController{
             return;
         }
         
-        $now = time();
+        $now = date('Y-m-d H;i:s');
         $order = array();
         $i = 1;
         for(;$i < $index; $i++){
@@ -52,7 +52,7 @@ class indexController{
         $inputaddress = $_POST['inputaddress'];
         
         $order['address'] = "$inputaddress,$inputname,$inputphone";
-        $order['date'] = date('Y-m-d H:i:s',$now);
+        $order['date'] = $now;
         
         $addrCore = core('addr');
         $addresses = $addrCore->get_address($user_id);
@@ -78,22 +78,22 @@ class indexController{
         $addrCore->set_address($user_id, $addresses, count($addresses));
         
         $mealCore = core('meal');
-        $mealCore->set_cur_order('', $user_id, $order, $now);
+        $order_id = $mealCore->set_cur_order('', $user_id, $order, $now);
         
-        content(array('user_id'=>$user_id,'order'=>$order, 'time_at'=>$now), 'order_success');
+        content(array('user_id'=>$user_id,'order'=>$order, 'order_id'=>$order_id), 'order_success');
         layout('layout');
     }
     
     function cancel_order(){
         $user_id = $_POST['user_id'];
-        $time_at = $_POST['time_at'];
+        $order_id = $_POST['order_id'];
         
-        if( empty($user_id) || empty($time_at) ){
+        if( empty($user_id) || empty($order_id) ){
             return;
         }
         
         $mealCore = core('meal');
-        $mealCore->delete_order($user_id, $time_at);
+        $mealCore->delete_order($user_id, $order_id);
         
         content(array('user_id'=>$user_id), 'cancel_order_success');
         layout('layout');
