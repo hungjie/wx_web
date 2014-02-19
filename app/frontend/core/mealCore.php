@@ -107,11 +107,12 @@ class mealCore {
 }
 
 function order_by_addr_func($a, $b) {
-    $r = strcmp($a['address'], $b['address']) or strcmp($a['time_at'], $b['time_at']);
+    $r = strcmp($a['address'], $b['address']);
+    if ($r == 0) $r = strcmp($a['time_at'], $b['time_at']);
 //    print "<br/>being<br/>";
-//    print $a['address'];
+//    print $a['address'] . " " . $a['time_at'];
 //    print "<br/>";
-//     print $b['address'];
+//     print $b['address'] . " " . $b['time_at'];
 //    print "<br/>";
 //     print $r;
 //    print "<br/>end<br/>";

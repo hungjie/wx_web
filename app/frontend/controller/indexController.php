@@ -46,7 +46,7 @@ class indexController{
             return;
         }
         
-        $now = date('Y-m-d H;i:s');
+        $now = date('Y-m-d H:i:s');
         $order = array();
         $i = 1;
         for(;$i < $index; $i++){
