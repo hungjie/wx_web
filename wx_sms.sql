@@ -85,6 +85,7 @@ CREATE TABLE IF NOT EXISTS `user_order_detail` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `time_at` DATETIME NOT NULL,
   `user_order_id` int(10) unsigned NOT NULL,
+  `count` int(10) unsigned NOT NULL,
   `meal_name` varchar(128) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `time_at` (`time_at`)

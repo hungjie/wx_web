@@ -24,6 +24,16 @@ class indexController{
         layout('layout');
     }
     
+    function test(){
+        $db = get_db();
+        $res = $db->begin_query()->table('user_order')->where('1')->exec();
+        while($res->next()){
+            print_r(json_decode($res->order_info));
+            print_r(($res->order_info));
+        }
+        return false;
+    }
+    
     function order_confirm(){
         $user_id = $_POST['user_id'];
         $index = $_POST['index'];

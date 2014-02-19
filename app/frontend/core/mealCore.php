@@ -37,10 +37,11 @@ class mealCore {
 
         $db->__table = 'user_order_detail';
         foreach ($order as $k => $v) {
-            if ($k == 'date' || $k == 'address' || !is_array($v)) continue;
-            $db->insert(array('user_order_id' =>$order_id, 'meal_name' => $k, 'count' => $v['count'], 'time_at' => $now));
+            if ($k == 'date' || $k == 'address' || !is_array($v))
+                continue;
+            $db->insert(array('user_order_id' => $order_id, 'meal_name' => $k, 'count' => $v['count'], 'time_at' => $now));
         }
-        
+
         return $order_id;
     }
 
@@ -61,33 +62,59 @@ class mealCore {
         return $reses;
     }
 
-    function get_meal_detail($day = null){
-        if ($day == null) $timestamp = mktime (0, 0, 0);
-        else $timestamp = 
+    function get_meal_detail($begin, $end) {
         $db = get_db();
         $db->begin_query();
-        $res = $db->table('user_order')->where(array('user_id' => $msisdn, 'status' => 0))
-                ->order_by_desc('id')
+        $res = $db->table('user_order_detail')->where(array("time_at >='$begin' and time_at <= '$end'"))
+                ->select('date_format(time_at, "%Y-%m-%d%p") date_am_pm, meal_name, sum(count) sum')
+                ->order_by_desc('date_am_pm')
+                ->group_by('date_am_pm , meal_name')
                 ->exec();
-
+        $return = array();
+        while ($res->next_assoc()) {
+            $return[] = $res->__data;
+        }
+        return $return;
     }
-    
-        function get_order_detail($day) {
+
+    function get_order_detail($begin, $end) {
         $db = get_db();
         $db->begin_query();
-        $res = $db->table('user_order')->where(array('user_id' => $msisdn, 'status' => 0))
-                ->order_by_desc('id')
+        $res = $db->table('user_order')->where(array("time_at >='$begin' and time_at <= '$end'"))
                 ->exec();
-
+        $return = array();
+        while ($res->next_assoc()) {
+            $order_item = $res->__data;
+            $order_item['order_info'] = json_decode($order_item['order_info']);
+            $order_item['address'] = $order_item['order_info']->address;
+            $return[] = $order_item;
+        }
+        usort($return, 'order_by_addr_func');
+        return $return;
     }
-    
 
     function delete_order($user_id, $order_id) {
         $db = get_db();
         $db->begin_query();
         $db->__table = 'user_order';
 
-        return $db->delete(array('user_id' => $user_id, 'order_id' => $order_id));
+        $db->delete(array('user_id' => $user_id, 'id' => $order_id));
+        $db->__table = 'user_order_detail';
+        $db->delete(array('user_order_id' => $order_id));
+        return true;
     }
 
 }
+
+function order_by_addr_func($a, $b) {
+    $r = strcmp($a['address'], $b['address']) or strcmp($a['time_at'], $b['time_at']);
+//    print "<br/>being<br/>";
+//    print $a['address'];
+//    print "<br/>";
+//     print $b['address'];
+//    print "<br/>";
+//     print $r;
+//    print "<br/>end<br/>";
+    return $r;
+}
+

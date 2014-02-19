@@ -17,7 +17,7 @@ $config = array(
         , 'db' => 'wx_sms'
         , 'user' => 'root'
         , 'password' => 'iloveu'
-        , 'charset' => ''
+        , 'charset' => 'utf8'
     )
     , 'dom_ready' => array()
     , 'middleware' => array() //array('cachepage' => '/(^index\/index$|^d\/index$)/',)
