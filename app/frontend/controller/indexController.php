@@ -13,6 +13,10 @@ class indexController{
     function index(){
         $msisdn = $_GET['msisdn'];
         
+        if(empty($msisdn)){
+            return;
+        }
+        
         $mealCore = core('meal');
         $meals = $mealCore->getmeals();
         

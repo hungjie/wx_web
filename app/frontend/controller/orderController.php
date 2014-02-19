@@ -12,6 +12,9 @@ class orderController{
     }
     
     function view($msisdn){
+        if(empty($msisdn)){
+            return;
+        }
         $meals = core('meal');
         $orders = $meals->get_cur_order($msisdn);
         
