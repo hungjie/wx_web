@@ -60,6 +60,7 @@ class indexController{
         foreach($addresses as $address){
             if($address == $order['address']){
                 $already_exsit_addr = true;
+                break;
             }
         }
         
@@ -73,9 +74,8 @@ class indexController{
             }
             
             array_push($addresses, $order['address']);
+            $addrCore->set_address($user_id, $addresses, count($addresses));
         }
-        
-        $addrCore->set_address($user_id, $addresses, count($addresses));
         
         $mealCore = core('meal');
         $mealCore->set_cur_order('', $user_id, $order, $now);

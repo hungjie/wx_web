@@ -17,4 +17,15 @@ class orderController{
         
         content(array('user_id'=>$msisdn,'orders'=>$orders), 'order_views');
     }
+    
+    function cancel_order($user_id, $id){
+        if( empty($user_id) || empty($id) ){
+            return;
+        }
+        
+        $mealCore = core('meal');
+        $mealCore->delete_order_by_id($user_id, $id);
+        
+        $this->view($user_id);
+    }
 }

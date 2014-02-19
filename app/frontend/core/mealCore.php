@@ -60,4 +60,12 @@ class mealCore {
         
         return $db->delete(array('user_id'=>$user_id, 'time_at'=>$time_at));
     }
+    
+    function delete_order_by_id($user_id, $id){
+        $db = get_db();
+        $db->begin_query();
+        $db->__table = 'user_order';
+        
+        return $db->delete(array('user_id'=>$user_id, 'id'=>$id));
+    }
 }
