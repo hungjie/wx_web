@@ -27,7 +27,7 @@ class addrCore{
         $addr_encode = json_encode($address);
         
         $db->__table = 'addresses';
-        if($count == 1){
+        if($count == 0){
             $db->insert(array('user_id'=>$msisdn,'address'=>$addr_encode));
         }else{
             $db->update(array('user_id'=>$msisdn), array('address'=>$addr_encode));

@@ -13,6 +13,10 @@ class indexController{
     function index(){
         $msisdn = $_GET['msisdn'];
         
+        if(empty($msisdn)){
+            return;
+        }
+        
         $mealCore = core('meal');
         $meals = $mealCore->getmeals();
         
@@ -70,6 +74,7 @@ class indexController{
         foreach($addresses as $address){
             if($address == $order['address']){
                 $already_exsit_addr = true;
+                break;
             }
         }
         
@@ -82,10 +87,11 @@ class indexController{
                 $addresses = array();
             }
             
+            $type = count($addresses);
+            
             array_push($addresses, $order['address']);
+            $addrCore->set_address($user_id, $addresses, $type);
         }
-        
-        $addrCore->set_address($user_id, $addresses, count($addresses));
         
         $mealCore = core('meal');
         $order_id = $mealCore->set_cur_order('', $user_id, $order, $now);
