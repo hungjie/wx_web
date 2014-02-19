@@ -77,8 +77,10 @@ class indexController{
                 $addresses = array();
             }
             
+            $type = count($addresses);
+            
             array_push($addresses, $order['address']);
-            $addrCore->set_address($user_id, $addresses, count($addresses));
+            $addrCore->set_address($user_id, $addresses, );
         }
         
         $mealCore = core('meal');
