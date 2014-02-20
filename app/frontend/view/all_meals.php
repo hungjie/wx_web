@@ -43,19 +43,18 @@ foreach ($data['addrs'] as $addr) {
                 <h1>开心订单<small>剩余<span class='label label-primary'><?php echo $order_count;?></span>份</small></h1>
                 <small>订餐时间：每天<strong><?php echo $start_order_time;?></strong>至<strong><?php echo $end_order_time;?></strong></small>
             </div>
-            <table class="table table-striped">
+            <table class="table-striped" style='width:100%;max-width: 100%;margin-bottom: 20px;border-spacing: 0;'>
                 <thead>
-                    <tr>
+                    <tr style="border-bottom: 1px solid #ccc;">
                         <th>#</th>
                         <th>餐名</th>
-                        <th>价格</th>
                         <th>数量</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php echo $meal_str; ?>
                     <tr class=''>
-                        <td colspan="4" class='col-xs-12'>
+                        <td colspan="3" class='col-xs-12'>
                             <div class="form-group">
                                 <label for="disabledSelect">选择您的历史地址：</label>
                                 <select id="select_addr_id" class="form-control">
@@ -100,7 +99,7 @@ foreach ($data['addrs'] as $addr) {
                             </div>
                         </td>
                     </tr>
-                    <tr><td colspan="4" class='col-xs-12'>
+                    <tr><td colspan="3" class='col-xs-12'>
                             <div class="form-group">
                                 <button id="submit_modal" type='submit' class="btn btn-primary">提交订单</button>
                             </div>
