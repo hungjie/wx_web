@@ -16,7 +16,7 @@ $count_btn .= "<button modify_id='$input_id' type='button' class='btn_jian btn b
 
 $price_html = "<strong name='price$index'>$price</strong>元";
 ?>
-<tr>
+<tr style="border-bottom: 1px solid #ccc; ">
 <input type='hidden' name="price<?php echo $index; ?>" value='<?php echo $price; ?>'>
 <input type='hidden' name="name<?php echo $index; ?>" value='<?php echo $name; ?>'>
 <!--<td class='col-xs-1' style='padding: 5px;'><?php //echo $index; ?></td>-->

@@ -29,6 +29,11 @@ foreach ($data['addrs'] as $addr) {
     $address = "<option value=''>$addr</option>";
     $addrs_option .= $address;
 }
+
+$html_left = '';
+if($order_count <= 10){
+    $html_left = "<small>剩余<span class='label label-primary'><?php echo $order_count;?></span>份</small>";
+}
 ?>
 
 
@@ -40,7 +45,7 @@ foreach ($data['addrs'] as $addr) {
             <input class='hidden' name='user_id' value='<?php echo $user_id; ?>'>
             <input class='hidden' name='index' value='<?php echo $index; ?>'>
             <div class="page-header">
-                <h1>开心订单<small>剩余<span class='label label-primary'><?php echo $order_count;?></span>份</small></h1>
+                <h1>开心订单<?php echo $left_html;?></h1>
                 <small>订餐时间：每天<strong><?php echo $start_order_time;?></strong>至<strong><?php echo $end_order_time;?></strong></small>
             </div>
             <table class="table-striped" style='width:100%;max-width: 100%;margin-bottom: 20px;border-spacing: 0;'>
