@@ -17,6 +17,22 @@ class indexController{
             return;
         }
         
+        $system = core('system');
+        $system_config = $system->is_out_date_or_count();
+        
+        if($system_config == false){
+            return;
+        }
+        
+        list($isopen, $start, $end, $count) = $system_config;
+        
+        if(!$isopen){
+            content(array('start'=>$start,
+                'end'=>$end,
+                'count'=>$count), 'stop_order');
+            return;
+        }
+        
         $mealCore = core('meal');
         $meals = $mealCore->getmeals();
         
@@ -24,8 +40,11 @@ class indexController{
         $addrs = $addrCore->get_address($msisdn);
         
         content(array('user_id'=>$msisdn,
-            'meals'=>$meals, 'addrs'=>$addrs), 'all_meals');
-        layout('layout');
+            'meals'=>$meals,
+            'addrs'=>$addrs,
+            'start'=>$start,
+            'end'=>$end,
+            'count'=>$count), 'all_meals');
     }
     
     function test(){
@@ -46,6 +65,22 @@ class indexController{
             return;
         }
         
+        $system = core('system');
+        $system_config = $system->is_out_date_or_count();
+        
+        if($system_config == false){
+            return;
+        }
+        
+        list($isopen, $start, $end, $count) = $system_config;
+        
+        if(!$isopen){
+            content(array('start'=>$start,
+                'end'=>$end,
+                'count'=>$count), 'stop_order');
+            return;
+        }
+        
         $now = date('Y-m-d H:i:s');
         $order = array();
         $i = 1;
@@ -61,11 +96,12 @@ class indexController{
             $order[$name]=array('count'=>$count,'price'=>$price);
         }
         
+        $inputarea = $_POST['inputarea'];
         $inputphone = $_POST['inputphone'];
         $inputname = $_POST['inputname'];
         $inputaddress = $_POST['inputaddress'];
         
-        $order['address'] = "$inputaddress,$inputname,$inputphone";
+        $order['address'] = "$inputarea,$inputaddress,$inputname,$inputphone";
         $order['date'] = $now;
         
         $addrCore = core('addr');

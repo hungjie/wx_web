@@ -12,6 +12,10 @@
   <td>@mdo</td>
   </tr>
  */
+$start_order_time = date('H:i:s',$data['start']);
+$end_order_time = date('H:i:s',$data['end']);
+$order_count = $data['count'];
+
 $meal_str = '';
 $index = 1;
 $user_id = $data['user_id'];
@@ -36,7 +40,8 @@ foreach ($data['addrs'] as $addr) {
             <input class='hidden' name='user_id' value='<?php echo $user_id; ?>'>
             <input class='hidden' name='index' value='<?php echo $index; ?>'>
             <div class="page-header">
-                <h1>开心订单</h1>
+                <h1>开心订单<small>剩余<span class='label label-primary'><?php echo $order_count;?></span>份</small></h1>
+                <small>订餐时间：每天<strong><?php echo $start_order_time;?></strong>至<strong><?php echo $end_order_time;?></strong></small>
             </div>
             <table class="table table-striped">
                 <thead>
@@ -57,21 +62,26 @@ foreach ($data['addrs'] as $addr) {
                                     <?php echo $addrs_option; ?>
                                 </select>
                             </div>
-
                             <div class="form-group">
-                                <label for="inputaddress" class="control-label">地址</label>
+                                <label for="inputarea" class="control-label">片区：</label>
+                                <select name='inputarea' id="inputarea" class="form-control">
+                                    <option value='厦门软件园二期'>厦门软件园二期</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputaddress" class="control-label">地址：</label>
                                 <div class="">
-                                    <input type="text" class="form-control" id="inputaddress" name='inputaddress' placeholder="现在支持厦门软件二期片区">
+                                    <input type="text" class="form-control" id="inputaddress" name='inputaddress' placeholder="现在支持厦门软件二期片区，请填写楼栋信息。">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputname" class="control-label">留名</label>
+                                <label for="inputname" class="control-label">留名：</label>
                                 <div class="">
                                     <input type="text" class="form-control" id="inputname" name='inputname' placeholder="留下您的大名">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputphone" class="control-label">手机</label>
+                                <label for="inputphone" class="control-label">手机：</label>
                                 <div class="">
                                     <input type="text" class="form-control" id="inputphone" name='inputphone' placeholder="联系号码">
                                 </div>
@@ -137,15 +147,18 @@ $('.btn_jian').click(function(){
 var selectcheckText=$("#select_addr_id").find("option:selected").text();
 if(selectcheckText){
     var addr_info = selectcheckText.split(",");
-    if(addr_info.length == 3){
-        var address = addr_info[0];
-        var name = addr_info[1];
-        var phoneno = addr_info[2];
+    if(addr_info.length == 4){
+        var area = addr_info[0];
+        var address = addr_info[1];
+        var name = addr_info[2];
+        var phoneno = addr_info[3];
 
+        area = area.replace(/(^\s*)|(\s*$)/g, "");
         address = address.replace(/(^\s*)|(\s*$)/g, "");
         name = name.replace(/(^\s*)|(\s*$)/g, "");
         phoneno = phoneno.replace(/(^\s*)|(\s*$)/g, "");
 
+        $('#inputarea').val(area);
         $("#inputaddress").val(address);
         $("#inputname").val(name);
         $("#inputphone").val(phoneno);
@@ -156,15 +169,18 @@ $("#select_addr_id").change(function(){
         var selectcheckText=$("#select_addr_id").find("option:selected").text();
         if(selectcheckText){
             var addr_info = selectcheckText.split(",");
-            if(addr_info.length == 3){
-                var address = addr_info[0];
-                var name = addr_info[1];
-                var phoneno = addr_info[2];
+            if(addr_info.length == 4){
+                var area = addr_info[0];
+                var address = addr_info[1];
+                var name = addr_info[2];
+                var phoneno = addr_info[3];
         
+                area = area.replace(/(^\s*)|(\s*$)/g, "");
                 address = address.replace(/(^\s*)|(\s*$)/g, "");
                 name = name.replace(/(^\s*)|(\s*$)/g, "");
                 phoneno = phoneno.replace(/(^\s*)|(\s*$)/g, "");
 
+                $('#inputarea').val(area);
                 $("#inputaddress").val(address);
                 $("#inputname").val(name);
                 $("#inputphone").val(phoneno);

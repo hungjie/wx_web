@@ -4,15 +4,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/code/wx_web/app/frontend/config.php</file>
-            <file>file:/D:/code/wx_web/app/frontend/controller/indexController.php</file>
-            <file>file:/D:/code/wx_web/app/frontend/core/mealCore.php</file>
             <file>file:/D:/code/wx_web/app/frontend/controller/orderController.php</file>
-            <file>file:/D:/code/wx_web/web/admin_c.php</file>
-            <file>file:/D:/code/wx_web/app/frontend/core/addrCore.php</file>
-            <file>file:/D:/code/wx_web/app/frontend/view/all_meals.php</file>
             <file>file:/D:/code/wx_web/app/frontend/view/order_views.php</file>
-            <file>file:/D:/code/wx_web/app/frontend/view/cancel_order_success.php</file>
         </group>
     </open-files>
 </project-private>

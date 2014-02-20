@@ -48,7 +48,9 @@ class mealCore {
     function get_cur_order($msisdn) {
         $db = get_db();
         $db->begin_query();
+        $today_date = date("Y-m-d");
         $res = $db->table('user_order')->where(array('user_id' => $msisdn, 'status' => 0))
+                ->where("time_at > '$today_date'")
                 ->order_by_desc('id')
                 ->exec();
 

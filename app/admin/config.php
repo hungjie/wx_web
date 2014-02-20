@@ -16,7 +16,7 @@ $config = array(
         'host' => '127.0.0.1'
         , 'db' => 'wx_sms'
         , 'user' => 'root'
-        , 'password' => 'admin'
+        , 'password' => 'iloveu'
         , 'charset' => ''
     )
     , 'dom_ready' => array()

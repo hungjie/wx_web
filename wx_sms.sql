@@ -110,3 +110,30 @@ CREATE TABLE IF NOT EXISTS `user_session` (
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `system_config`
+--
+
+DROP TABLE IF EXISTS `system_config`;
+CREATE TABLE IF NOT EXISTS `system_config` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `start_am` varchar(64) NOT NULL,
+  `end_am` varchar(64) NOT NULL,
+  `meal_count` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `system_config`
+--
+
+INSERT INTO `system_config` (`id`, `start_am`, `end_am`, `meal_count`) VALUES
+(1, '09:00:00', '18:30:00', 200);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
