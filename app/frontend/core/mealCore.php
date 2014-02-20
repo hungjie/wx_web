@@ -87,8 +87,8 @@ class mealCore {
         $return = array();
         while ($res->next_assoc()) {
             $order_item = $res->__data;
-            $order_item['order_info'] = json_decode($order_item['order_info']);
-            $order_item['address'] = $order_item['order_info']->address;
+            $order_item['order_info'] = json_decode($order_item['order_info'], true);
+            $order_item['address'] = $order_item['order_info']['address'];
             $return[] = $order_item;
         }
         usort($return, 'order_by_addr_func');
