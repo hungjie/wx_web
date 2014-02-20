@@ -45,7 +45,7 @@ if($order_count <= 10){
             <input class='hidden' name='user_id' value='<?php echo $user_id; ?>'>
             <input class='hidden' name='index' value='<?php echo $index; ?>'>
             <div class="page-header">
-                <h1>开心订单<?php echo $left_html;?></h1>
+                <h1>开心订单<?php echo $html_left;?></h1>
                 <small>订餐时间：每天<strong><?php echo $start_order_time;?></strong>至<strong><?php echo $end_order_time;?></strong></small>
             </div>
             <table class="table-striped" style='width:100%;max-width: 100%;margin-bottom: 20px;border-spacing: 0;'>
