@@ -32,7 +32,7 @@ foreach ($data['addrs'] as $addr) {
 
 $html_left = '';
 if($order_count <= 10){
-    $html_left = "<small>剩余<span class='label label-primary'><?php echo $order_count;?></span>份</small>";
+    $html_left = "<small><span class='label label-primary'>货源紧张</span></small>";
 }
 ?>
 
