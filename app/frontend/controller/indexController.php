@@ -98,10 +98,10 @@ class indexController{
             $order[$name]=array('count'=>$count,'price'=>$price);
         }
         
-        $inputarea = $_POST['inputarea'];
-        $inputphone = $_POST['inputphone'];
-        $inputname = $_POST['inputname'];
-        $inputaddress = $_POST['inputaddress'];
+        $inputarea = str_replace(',', ' ', $_POST['inputarea']);
+        $inputphone = str_replace(',', ' ', $_POST['inputphone']);
+        $inputname = str_replace(',', ' ', $_POST['inputname']);
+        $inputaddress = str_replace(',', ' ', $_POST['inputaddress']);
         
         $order['address'] = "$inputarea,$inputaddress,$inputname,$inputphone";
         $order['date'] = $now;
