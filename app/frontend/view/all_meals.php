@@ -51,8 +51,8 @@ if($order_count <= 10){
             <table class="table-striped" style='width:100%;max-width: 100%;margin-bottom: 20px;border-spacing: 0;'>
                 <thead>
                     <tr style="border-bottom: 1px solid #ccc;">
-                        <th>#</th>
                         <th>餐名</th>
+                        <th></th>
                         <th>数量</th>
                     </tr>
                 </thead>
