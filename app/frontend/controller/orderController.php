@@ -30,5 +30,7 @@ class orderController{
         $mealCore->delete_order($user_id, $id);
         
         $this->view($user_id);
+        print document('content');
+        return false;
     }
 }

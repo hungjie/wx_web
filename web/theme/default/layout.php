@@ -12,7 +12,9 @@
 
     </head>
     <body>
+        <div id="for_ajax_div">
         <?php echo document('content'); ?>
+        </div>
     </body>
     <script type="text/javascript">
         $(function(){

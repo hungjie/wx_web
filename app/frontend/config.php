@@ -6,6 +6,7 @@ $config = array(
     , 'layout' => 'layout.php'
     , 'js' => array(
         'http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js',
+        'http://cdn.bootcss.com/jquery.form/3.46/jquery.form.min.js',
         '/asset/bootstrap-3.0.3/js/bootstrap.min.js',
     )
     , 'css' => array(
