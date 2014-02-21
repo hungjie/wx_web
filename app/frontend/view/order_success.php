@@ -40,7 +40,7 @@ $total_price_html = "<div class='row'><p class='text-right col-xs-12'>合计<str
         <?php echo $total_price_html;?>
         <?php echo $addr_info;?>
         
-        <form id='form_id' class="form-horizontal" role="form" action="/index/cancel_order" method='post'>
+        <form id='form_id' class="for_ajax form-horizontal" role="form" action="/index/cancel_order" method='post'>
             <input class='hidden' name='user_id' value='<?php echo $user_id; ?>'>
             <input class='hidden' name='order_id' value='<?php echo $order_id; ?>'>
             <div class="caption">
@@ -50,3 +50,8 @@ $total_price_html = "<div class='row'><p class='text-right col-xs-12'>合计<str
         </form>
     </div>
 </div>
+<script>
+    $('.for_ajax').ajaxForm(function(res){
+    $('#for_ajax_div').html(res);
+});
+</script>

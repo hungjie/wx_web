@@ -41,7 +41,7 @@ if($order_count <= 10){
 
     <!-- Begin page content -->
     <div class="container">
-        <form id='form_id' class="form-horizontal" role="form" method='post' action='/index/order_confirm'>
+        <form id='form_id' class="for_ajax form-horizontal" role="form" method='post' action='/index/order_confirm'>
             <input class='hidden' name='user_id' value='<?php echo $user_id; ?>'>
             <input class='hidden' name='index' value='<?php echo $index; ?>'>
             <div class="page-header">
@@ -115,6 +115,11 @@ if($order_count <= 10){
         </form>
     </div>
 </div>
+<script>
+    $('.for_ajax').ajaxForm(function(res){
+    $('#for_ajax_div').html(res);
+});
+</script>
 
 <?php
 $js = <<<eto

@@ -79,3 +79,10 @@ eto;
         <?php echo $infos; ?>
     </div>
 </div>
+<script>
+    $('a').click(function(){
+    url = $(this).attr('href');
+    $('#for_ajax_div').load(url);
+    return false;
+});
+</script>
