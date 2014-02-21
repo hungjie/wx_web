@@ -12,6 +12,7 @@ class indexController{
     
     function index(){
         $msisdn = $_GET['msisdn'];
+        $index = $_GET['index'];
         
         if(empty($msisdn)){
             return;
@@ -44,7 +45,8 @@ class indexController{
             'addrs'=>$addrs,
             'start'=>$start,
             'end'=>$end,
-            'count'=>$count), 'all_meals');
+            'count'=>$count,
+            'index'=>$index), 'all_meals');
     }
     
     function test(){

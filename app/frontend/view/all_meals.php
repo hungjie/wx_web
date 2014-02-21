@@ -12,8 +12,8 @@
   <td>@mdo</td>
   </tr>
  */
-$start_order_time = date('H:i:s',$data['start']);
-$end_order_time = date('H:i:s',$data['end']);
+$start_order_time = date('H:i',$data['start']);
+$end_order_time = date('H:i',$data['end']);
 $order_count = $data['count'];
 
 $meal_str = '';
@@ -168,6 +168,9 @@ if(selectcheckText){
         $("#inputphone").val(phoneno);
     }
 }
+        
+$("#count_id{$data['index']}").val('1');
+comulate_total();
         
 $("#select_addr_id").change(function(){
         var selectcheckText=$("#select_addr_id").find("option:selected").text();
