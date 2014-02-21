@@ -112,16 +112,21 @@ class indexController {
         $addrCore = core('addr');
         $addresses = $addrCore->get_address($user_id);
         $already_exsit_addr = false;
-        foreach ($addresses as $address) {
+        foreach ($addresses as $k => $address) {
             if ($address == $order['address']) {
                 $already_exsit_addr = true;
+                if ($k !=0){ // not first/default addr
+                    unset($addresses[$k]);
+                    array_unshift($addresses, $address);
+                    $addrCore->set_address($user_id, $addresses, 1);
+                }
                 break;
             }
         }
 
         if (!$already_exsit_addr) {
             if (count($addresses) >= 3) {
-                array_shift($addresses);
+                array_pop($addresses);
             }
 
             if ($addresses == false) {
@@ -130,7 +135,7 @@ class indexController {
 
             $type = count($addresses);
 
-            array_push($addresses, $order['address']);
+            array_unshift($addresses, $order['address']);
             $addrCore->set_address($user_id, $addresses, $type);
         }
 
