@@ -12,7 +12,7 @@ class mealCore {
         $db = get_db();
         $db->begin_query();
 
-        $res = $db->table('meal_list')->exec();
+        $res = $db->table('meal_list')->order_by('id')->exec();
         $reses = array();
         while ($res && $res->next()) {
             array_push($reses, $res->__data);

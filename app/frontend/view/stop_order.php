@@ -11,8 +11,8 @@ $end_am = $data['end'];
 
 $count = $data['count'];
 
-$data_start = date('Y-m-d H:i:s',$start_am);
-$data_end= date('Y-m-d H:i:s', $end_am);
+$data_start = date('H:i',$start_am);
+$data_end= date('H:i', $end_am);
 
 if($count > 0){
 ?>

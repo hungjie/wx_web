@@ -14,8 +14,9 @@ class indexController {
 
     function index() {
         $msisdn = $_GET['msisdn'];
-
-        if (empty($msisdn)) {
+        $index = $_GET['index'];
+        
+        if(empty($msisdn)){
             return;
         }
 
@@ -40,13 +41,15 @@ class indexController {
 
         $addrCore = core('addr');
         $addrs = $addrCore->get_address($msisdn);
+        
+        content(array('user_id'=>$msisdn,
+            'meals'=>$meals,
+            'addrs'=>$addrs,
+            'start'=>$start,
+            'end'=>$end,
+            'count'=>$count,
+            'index'=>$index), 'all_meals');
 
-        content(array('user_id' => $msisdn,
-            'meals' => $meals,
-            'addrs' => $addrs,
-            'start' => $start,
-            'end' => $end,
-            'count' => $count), 'all_meals');
     }
 
     function test() {
