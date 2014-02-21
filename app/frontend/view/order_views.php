@@ -50,7 +50,6 @@ eto;
     <div class="thumbnail">
       <div class="caption">
         <h3>您还没有订单！</h3>
-        <p><a href='/?msisdn={$data['user_id']}' class="btn btn-primary btn-lg" role="button">开始订单</a></p>
       </div>
     </div>
   </div>
@@ -59,7 +58,7 @@ eto;
 }
 
 $t =<<<eto
-<form id='form_id' class="form-horizontal" role="form" action="/order/cancel_order_by_id" method='post'>
+<form id='form_id' class="form-horizontal" role="form" action="/order/cancel_order" method='post'>
             <input class='hidden' name='user_id' value='{$data['user_id']}'>
             <input class='hidden' name='id' value='{$order['id']}'>
             <div class="form-group">
