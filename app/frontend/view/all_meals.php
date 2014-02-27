@@ -12,8 +12,8 @@
   <td>@mdo</td>
   </tr>
  */
-$start_order_time = date('H:i',$data['start']);
-$end_order_time = date('H:i',$data['end']);
+$start_order_time = date('H:i', $data['start']);
+$end_order_time = date('H:i', $data['end']);
 $order_count = $data['count'];
 
 $meal_str = '';
@@ -31,12 +31,59 @@ foreach ($data['addrs'] as $addr) {
 }
 
 $html_left = '';
-if($order_count <= 10){
+if ($order_count <= 10) {
     $html_left = "<small><span class='label label-danger'>货源紧张</span></small>";
 }
 ?>
 
+<div class='row'>
+    <a href='#' class="btn btn-warning col-xs-12" data-toggle="collapse" data-target="#demo">
+        查看店铺信息
+    </a>
+</div>
 
+<div id="demo" class="collapse">
+    <div id="carousel-example-captions" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-captions" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-captions" data-slide-to="1" class=""></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="item active">
+                <img data-src="" alt="900x500" src="/image/head.jpg">
+                <div class="carousel-caption">
+                    <h3>Second slide label</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+            <div class="item">
+                <img data-src="" alt="900x500" src="/image/head.jpg">
+                <div class="carousel-caption">
+                    <h3>Third slide label</h3>
+                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h3>店铺信息</h3>
+                    <address><span class='glyphicon glyphicon-user'></span> <strong>名称：</strong>
+                        亨捷订餐
+                    </address>
+                    <address><span class='glyphicon glyphicon-cutlery'></span> <strong>地址：</strong>
+                        湖里高科技园
+                    </address>
+                    <address><span class='glyphicon glyphicon-earphone'></span> <strong>联系电话：</strong>
+                        <a href='#'>(123) 456-7890</a>
+                    </address>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div id="wrap">
 
     <!-- Begin page content -->
@@ -45,8 +92,8 @@ if($order_count <= 10){
             <input class='hidden' name='user_id' value='<?php echo $user_id; ?>'>
             <input class='hidden' name='index' value='<?php echo $index; ?>'>
             <div class="page-header">
-                <h1>开心订单<?php echo $html_left;?></h1>
-                <small>订餐时间：每天<strong><?php echo $start_order_time;?></strong>至<strong><?php echo $end_order_time;?></strong></small>
+                <h1>开心订单<?php echo $html_left; ?></h1>
+                <small>订餐时间：每天<strong><?php echo $start_order_time; ?></strong>至<strong><?php echo $end_order_time; ?></strong></small>
             </div>
             <table class="table-striped" style='width:100%;max-width: 100%;margin-bottom: 20px;border-spacing: 0;'>
                 <thead>
@@ -116,9 +163,9 @@ if($order_count <= 10){
     </div>
 </div>
 <script>
-    $('.for_ajax').ajaxForm(function(res){
-    $('#for_ajax_div').html(res);
-});
+    $('.for_ajax').ajaxForm(function(res) {
+        $('#for_ajax_div').html(res);
+    });
 </script>
 
 <?php
