@@ -6,13 +6,12 @@
  * and open the template in the editor.
  */
 
-$start_am = $data['start'];
-$end_am = $data['end'];
+$start_am = $data['start_am'];
+$end_am = $data['end_am'];
+$start_pm = $data['start_pm'];
+$end_pm = $data['end_pm'];
 
 $count = $data['count'];
-
-$data_start = date('H:i',$start_am);
-$data_end= date('H:i', $end_am);
 
 if($count > 0){
 ?>
@@ -26,7 +25,7 @@ if($count > 0){
             <div class="thumbnail">
                 <div class="caption">
                     <h4>您错过了今天的订餐时间</h4>
-                        <p>我们的订餐时间为每天的 <strong><?php echo $data_start;?></strong>到 <strong><?php echo $data_end;?></strong></p>
+                        <p>订餐时间为: <strong><?php echo $start_am;?></strong>至<strong><?php echo $end_am;?></strong>, <strong><?php echo $start_pm;?></strong>至<strong><?php echo $end_pm;?></strong></p>
                 </div>
             </div>
         </div>

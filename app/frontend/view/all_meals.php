@@ -12,8 +12,12 @@
   <td>@mdo</td>
   </tr>
  */
-$start_order_time = date('H:i', $data['start']);
-$end_order_time = date('H:i', $data['end']);
+
+$start_order_time_am =$data['start_am'];
+$end_order_time_am = $data['end_am'];
+$start_order_time_pm =$data['start_pm'];
+$end_order_time_pm = $data['end_pm'];
+
 $order_count = $data['count'];
 
 $meal_str = '';
@@ -92,8 +96,8 @@ if ($order_count <= 10) {
             <input class='hidden' name='user_id' value='<?php echo $user_id; ?>'>
             <input class='hidden' name='index' value='<?php echo $index; ?>'>
             <div class="page-header">
-                <h1>开心订单<?php echo $html_left; ?></h1>
-                <small>订餐时间：每天<strong><?php echo $start_order_time; ?></strong>至<strong><?php echo $end_order_time; ?></strong></small>
+                <h1>开心订单<?php echo $html_left;?></h1>
+                <small>订餐时间：<strong><?php echo $start_order_time_am;?></strong>至<strong><?php echo $end_order_time_am;?></strong>, <strong><?php echo $start_order_time_pm;?></strong>至<strong><?php echo $end_order_time_pm;?></strong></small>
             </div>
             <table class="table-striped" style='width:100%;max-width: 100%;margin-bottom: 20px;border-spacing: 0;'>
                 <thead>

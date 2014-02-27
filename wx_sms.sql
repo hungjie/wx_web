@@ -25,6 +25,22 @@ USE `wx_sms`;
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(128) NOT NULL,
+  `area` varchar(128) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `addresses`
 --
 
@@ -47,13 +63,15 @@ DROP TABLE IF EXISTS `meal_list`;
 CREATE TABLE IF NOT EXISTS `meal_list` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
-  `owner` varchar(64) NOT NULL DEFAULT 'hungjie',
+  `owner` varchar(128) NOT NULL DEFAULT 'hungjie',
   `description` text,
+  `img_path` varchar(256) DEFAULT NULL,
   `count` int(11) NOT NULL DEFAULT '0',
-  `price` double(7,2) NOT NULL,
+  `price` DECIMAL(10,2) NOT NULL,
+  `status` varchar(64) DEFAULT 'all',
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `name` (`name` ASC)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+  KEY `owner` (`owner`) 
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -64,14 +82,16 @@ CREATE TABLE IF NOT EXISTS `meal_list` (
 DROP TABLE IF EXISTS `user_order`;
 CREATE TABLE IF NOT EXISTS `user_order` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(128) NOT NULL,
-  `owner` varchar(128) NOT NULL DEFAULT 'hungjie',
+  `status` int(11) NOT NULL DEFAULT 1,
+  `total_count` int(10) unsigned NOT NULL,
+  `total_price` DECIMAL(10,2) NOT NULL,
   `time_at` DATETIME NOT NULL,
+  `user_id` varchar(128) NOT NULL,  
+  `owner` varchar(128) NOT NULL DEFAULT 'hungjie',
   `order_info` text NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
-  KEY `time_at` (`time_at`)  
+  KEY `time_at` (`time_at`, `owner`(10))  
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -99,8 +119,8 @@ CREATE TABLE IF NOT EXISTS `user_order_detail` (
 
 DROP TABLE IF EXISTS `user_session`;
 CREATE TABLE IF NOT EXISTS `user_session` (
-  `msisdn` varchar(32) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `msisdn` varchar(32) NOT NULL,
   `shortcode` varchar(32) NOT NULL,
   `session_value` blob,
   PRIMARY KEY (`id`),
@@ -120,19 +140,34 @@ CREATE TABLE IF NOT EXISTS `user_session` (
 
 DROP TABLE IF EXISTS `system_config`;
 CREATE TABLE IF NOT EXISTS `system_config` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `start_am` varchar(64) NOT NULL,
-  `end_am` varchar(64) NOT NULL,
-  `meal_count` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+    `name` varchar(127) NOT NULL,
+    `value` TEXT NOT NULL,
+  PRIMARY KEY (`name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `system_config`
 --
 
-INSERT INTO `system_config` (`id`, `start_am`, `end_am`, `meal_count`) VALUES
-(1, '09:00:00', '18:30:00', 200);
+INSERT INTO `system_config` VALUES
+('start_am', '09:00'), 
+('end_am', '10:50'), 
+('start_pm', '14:30'), 
+('end_pm', '19:50'),
+('meal_count', '200');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `system_var`
+--
+
+DROP TABLE IF EXISTS `system_var`;
+CREATE TABLE IF NOT EXISTS `system_var` (
+    `name` varchar(127) NOT NULL,
+    `value` TEXT NOT NULL,
+  PRIMARY KEY (`name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

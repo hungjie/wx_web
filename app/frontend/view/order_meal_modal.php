@@ -12,7 +12,7 @@ $index = $data[0];
 $input_id = "count_id$index";
 
 $count_btn = "<button modify_id='$input_id' type='button' class='btn_jia btn btn-success btn-sm'>+</button>";
-$count_btn .= "<input id='$input_id' name='count$index' class='count_class' price='$price' style='width:40%;' type='text' placeholder='数量' value='0'></input>";
+$count_btn .= "<input id='$input_id' name='o[{$data[1]['id']}]' class='count_class' price='$price' style='width:40%;' type='text' placeholder='数量' value='0'></input>";
 $count_btn .= "<button modify_id='$input_id' type='button' class='btn_jian btn btn-success btn-sm'>-</button>";
 
 $price_html = "<strong name='price$index'>$price</strong>元";
