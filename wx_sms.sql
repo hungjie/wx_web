@@ -99,8 +99,8 @@ CREATE TABLE IF NOT EXISTS `user_order_detail` (
 
 DROP TABLE IF EXISTS `user_session`;
 CREATE TABLE IF NOT EXISTS `user_session` (
-  `msisdn` varchar(32) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `msisdn` varchar(32) NOT NULL,
   `shortcode` varchar(32) NOT NULL,
   `session_value` blob,
   PRIMARY KEY (`id`),
@@ -120,19 +120,34 @@ CREATE TABLE IF NOT EXISTS `user_session` (
 
 DROP TABLE IF EXISTS `system_config`;
 CREATE TABLE IF NOT EXISTS `system_config` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `start_am` varchar(64) NOT NULL,
-  `end_am` varchar(64) NOT NULL,
-  `meal_count` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+    `name` varchar(127) NOT NULL,
+    `value` TEXT NOT NULL,
+  PRIMARY KEY (`name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `system_config`
 --
 
-INSERT INTO `system_config` (`id`, `start_am`, `end_am`, `meal_count`) VALUES
-(1, '09:00:00', '18:30:00', 200);
+INSERT INTO `system_config` VALUES
+('start_am', '09:00'), 
+('end_am', '10:50'), 
+('start_pm', '14:30'), 
+('end_pm', '16:50'),
+('meal_count', '200');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `system_var`
+--
+
+DROP TABLE IF EXISTS `system_var`;
+CREATE TABLE IF NOT EXISTS `system_var` (
+    `name` varchar(127) NOT NULL,
+    `value` TEXT NOT NULL,
+  PRIMARY KEY (`name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

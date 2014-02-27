@@ -15,24 +15,41 @@ class indexController {
     function index() {
         $msisdn = $_GET['msisdn'];
         $index = $_GET['index'];
-        
-        if(empty($msisdn)){
+
+        if (empty($msisdn)) {
             return;
         }
 
         $system = core('system');
-        $system_config = $system->is_out_date_or_count();
+        $system_config = $system->config();
 
-        if ($system_config == false) {
+        if (!$system_config) {
             return;
         }
 
-        list($isopen, $start, $end, $count) = $system_config;
+        $hour = date('H:i');
+        if ($hour < $system_config['start_am'])
+            $shop_status = 'close_am';
+        else if ($hour >= $system_config['start_am'] && $hour <= $system_config['end_am'])
+            $shop_status = 'open_am';
+        else if ($hour > $system_config['end_am'] && $hour < $system_config['start_pm'])
+            $shop_status = 'close_ap';
+        else if ($hour >= $system_config['start_pm'] && $hour <= $system_config['end_pm'])
+            $shop_status = 'open_pm';
+        else
+            $shop_status = 'close_pm';
 
-        if (!$isopen) {
-            content(array('start' => $start,
-                'end' => $end,
-                'count' => $count), 'stop_order');
+        $order_Ymd = date('YmdA');
+        $ordered_meal_count = $system->get_var($order_Ymd);
+
+        $left_meal = $system_config['meal_count'] - $ordered_meal_count;
+
+        if (strncmp($shop_status, 'close', 5) == 0) {
+            content(array('start_am' => $system_config['start_am'],
+                'end_am' => $system_config['end_am'],
+                'start_pm' => $system_config['start_pm'],
+                'end_pm' => $system_config['end_pm'],
+                'count' => $left_meal), 'stop_order');
             return;
         }
 
@@ -41,15 +58,16 @@ class indexController {
 
         $addrCore = core('addr');
         $addrs = $addrCore->get_address($msisdn);
-        
-        content(array('user_id'=>$msisdn,
-            'meals'=>$meals,
-            'addrs'=>$addrs,
-            'start'=>$start,
-            'end'=>$end,
-            'count'=>$count,
-            'index'=>$index), 'all_meals');
 
+        content(array('user_id' => $msisdn,
+            'meals' => $meals,
+            'addrs' => $addrs,
+            'start_am' => $system_config['start_am'],
+            'end_am' => $system_config['end_am'],
+            'start_pm' => $system_config['start_pm'],
+            'end_pm' => $system_config['end_pm'],
+            'count' => $left_meal,
+            'index' => $index), 'all_meals');
     }
 
     function test() {
@@ -105,7 +123,7 @@ class indexController {
         $inputphone = str_replace(',', ' ', $_POST['inputphone']);
         $inputname = str_replace(',', ' ', $_POST['inputname']);
         $inputaddress = str_replace(',', ' ', $_POST['inputaddress']);
-        
+
         $order['address'] = "$inputarea,$inputaddress,$inputname,$inputphone";
         $order['date'] = $now;
 
@@ -115,7 +133,7 @@ class indexController {
         foreach ($addresses as $k => $address) {
             if ($address == $order['address']) {
                 $already_exsit_addr = true;
-                if ($k !=0){ // not first/default addr
+                if ($k != 0) { // not first/default addr
                     unset($addresses[$k]);
                     array_unshift($addresses, $address);
                     $addrCore->set_address($user_id, $addresses, 1);
