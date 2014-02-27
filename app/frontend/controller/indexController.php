@@ -20,6 +20,8 @@ class indexController {
             return;
         }
 
+        $_SESSION['user_id'] = $msisdn;
+
         $system = core('system');
         $system_config = $system->config();
 
@@ -27,17 +29,7 @@ class indexController {
             return;
         }
 
-        $hour = date('H:i');
-        if ($hour < $system_config['start_am'])
-            $shop_status = 'close_am';
-        else if ($hour >= $system_config['start_am'] && $hour <= $system_config['end_am'])
-            $shop_status = 'open_am';
-        else if ($hour > $system_config['end_am'] && $hour < $system_config['start_pm'])
-            $shop_status = 'close_ap';
-        else if ($hour >= $system_config['start_pm'] && $hour <= $system_config['end_pm'])
-            $shop_status = 'open_pm';
-        else
-            $shop_status = 'close_pm';
+        $shop_status = $system->shop_status($system_config, 'hungjie');
 
         $order_Ymd = date('YmdA');
         $ordered_meal_count = $system->get_var($order_Ymd);
@@ -55,6 +47,7 @@ class indexController {
 
         $mealCore = core('meal');
         $meals = $mealCore->getmeals();
+        $_SESSION['meals'] = $meals;
 
         $addrCore = core('addr');
         $addrs = $addrCore->get_address($msisdn);
@@ -84,40 +77,50 @@ class indexController {
         $user_id = $_POST['user_id'];
         $index = $_POST['index'];
 
-        if (empty($user_id) || empty($index) || $index == 0) {
+        if ($user_id != $_SESSION['user_id'] || empty($user_id) || empty($index) || $index == 0) {
             return;
         }
 
         $system = core('system');
-        $system_config = $system->is_out_date_or_count();
+        $system_config = $system->config();
 
-        if ($system_config == false) {
+        if (!$system_config) {
             return;
         }
 
-        list($isopen, $start, $end, $count) = $system_config;
+        $shop_status = $system->shop_status($system_config, 'hungjie');
 
-        if (!$isopen) {
-            content(array('start' => $start,
-                'end' => $end,
-                'count' => $count), 'stop_order');
+        if (strncmp($shop_status, 'close', 5) == 0) {
+            content(array('start_am' => $system_config['start_am'],
+                'end_am' => $system_config['end_am'],
+                'start_pm' => $system_config['start_pm'],
+                'end_pm' => $system_config['end_pm'],
+                'count' => $left_meal), 'stop_order');
             return;
         }
 
         $now = date('Y-m-d H:i:s');
         $order = array();
-        $i = 1;
-        for (; $i < $index; $i++) {
-            $name = $_POST["name$i"];
-            $price = $_POST["price$i"];
-            $count = $_POST["count$i"];
-
+        $total_price = 0;
+        $total_count = 0;
+        foreach ($_POST['o'] as $k => $v) {
+            $count = $v;
             if (!is_numeric($count) || $count <= 0) {
                 continue;
             }
-
-            $order[$name] = array('count' => $count, 'price' => $price);
+            $name = $_SESSION['meals'][$k]['name'];
+            $price = $_SESSION['meals'][$k]['price'];
+            $order['meal'][$name] = array('count' => $count, 'price' => $price);
+            $total_count += $count;
+            $total_price += $count * $price;
         }
+
+        $order['total_count'] = $total_count;
+        $order['total_price'] = $total_price;
+
+        $order_Ymd = date('YmdA');
+        $ordered_meal_count = $system->get_var($order_Ymd);
+        $system->set_var($order_Ymd, $ordered_meal_count + $total_count);
 
         $inputarea = str_replace(',', ' ', $_POST['inputarea']);
         $inputphone = str_replace(',', ' ', $_POST['inputphone']);
