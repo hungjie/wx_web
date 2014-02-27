@@ -6,6 +6,7 @@
  */
 $name = $data[1]['name'];
 $price = $data[1]['price'];
+$img_path = $data[1]['img_path'];
 
 $index = $data[0];
 $input_id = "count_id$index";
@@ -23,7 +24,7 @@ $price_html = "<strong name='price$index'>$price</strong>元";
 <td colspan='2' class='col-xs-8' style='padding: 1px;'><?php //echo $name.$price_html; ?>
     <div class="media">
         <a class="pull-left" href="#">
-            <img class="media-object" alt="64x64" style="width: 64px; height: 64px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABN0lEQVR4Xu2YQQ6EIAxFdeXFODZnYu9qJk5C0sGiUiAx8FyKVPr76VPWEMJnmfhaEQAHsAXoARP3wIUmCAWgABSAAlBgYgXAIBgEg2AQDE4MAX6GwCAYBINgEAyCwYkVAIO1GPTe//nHOXfyU3xGG9PM1yNmzuRVDpCJ5ZKUyTwRoEfMqx3eTIBcJbdtW/Z9/w2XCtAqZncB5Atkkkc1NQFileVYFCi1fypcLqa1jzd1QM6+2va4EycKWRLTIkI3AY7FPKmmVmF5LxXvLmapCF0FiItp5QCZXClZulBAq/IVBtN9rvUAa8zSysfnqxxgfemb5iFA7Zfgm6ppWQsOwAEciXEkxpGYpXuOMgcKQAEoAAWgwCgd3ZIHFIACUAAKQAFL9xxlDhSAAlAACkCBUTq6JY/pKfAFwO6XkLwNdToAAAAASUVORK5CYII=">
+            <img class="media-object" style="width: 64px; height: 64px;" src="<?php echo $img_path;?>">
         </a>
         <div class="media-body">
 <?php echo "<p>$name</p>" . $price_html; ?>

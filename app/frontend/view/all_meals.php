@@ -108,8 +108,8 @@ if($order_count <= 10){
                         </td>
                     </tr>
                     <tr><td colspan="3" class='col-xs-12'>
-                            <div class="form-group">
-                                <button id="submit_modal" type='submit' class="btn btn-primary">提交订单</button>
+                            <div class="form-group ">
+                                <button id="submit_modal" type='submit' class="btn col-xs-12 btn-primary">提交订单</button>
                             </div>
                         </td>
                     </tr>
