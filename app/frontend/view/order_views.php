@@ -35,7 +35,7 @@ if ($data['orders']) {
         <div class='row'><p class='text-right col-xs-12'>合计<strong>$all_total</strong>元</p></div>
         <div class='row'><p class='text-left col-xs-12'>地址：<strong>{$order['address']}</strong></p></div>
         <div class='row'><p class='text-left col-xs-12'>时间：<strong>{$order['date']}</strong></p></div>
-        <p><a href="/order/cancel_order/{$data['user_id']}/{$order['id']}" class="btn btn-danger" role="button">取消订单</a></p>
+        <div class='row'><p class='col-xs-12'><a href="/order/cancel_order/{$data['user_id']}/{$order['id']}" class="btn col-xs-12 btn-danger" role="button">取消订单</a></p></div>
       </div>
     </div>
   </div>

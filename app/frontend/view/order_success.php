@@ -44,7 +44,7 @@ $total_price_html = "<div class='row'><p class='text-right col-xs-12'>合计<str
             <input class='hidden' name='user_id' value='<?php echo $user_id; ?>'>
             <input class='hidden' name='order_id' value='<?php echo $order_id; ?>'>
             <div class="caption">
-                <button id="submit_modal" type='submit' class="btn btn-danger ">取消订单</button>
+                <button id="submit_modal" type='submit' class="btn col-xs-12 btn-danger ">取消订单</button>
 
             </div>
         </form>
