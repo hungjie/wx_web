@@ -13,9 +13,9 @@
   </tr>
  */
 
-$start_order_time_am =$data['start_am'];
+$start_order_time_am = $data['start_am'];
 $end_order_time_am = $data['end_am'];
-$start_order_time_pm =$data['start_pm'];
+$start_order_time_pm = $data['start_pm'];
 $end_order_time_pm = $data['end_pm'];
 
 $order_count = $data['count'];
@@ -41,15 +41,62 @@ if ($order_count <= 10) {
 ?>
 
 <div id="wrap">
+    <div class='row'>
+        <a href='#' class="btn btn-warning col-xs-12" data-toggle="collapse" data-target="#demo">
+            查看店铺信息
+        </a>
+    </div>
 
+    <div id="demo" class="collapse">
+        <div id="carousel-example-captions" class="carousel slide row" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-captions" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-captions" data-slide-to="1" class=""></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img data-src="" alt="900x500" src="/image/head.jpg">
+                    <div class="carousel-caption">
+                        <h3>Second slide label</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img data-src="" alt="900x500" src="/image/head.jpg">
+                    <div class="carousel-caption">
+                        <h3>Third slide label</h3>
+                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h3>店铺信息</h3>
+                        <address><span class='glyphicon glyphicon-user'></span> <strong>名称：</strong>
+                            好佳订餐
+                        </address>
+                        <address><span class='glyphicon glyphicon-cutlery'></span> <strong>地址：</strong>
+                            湖里高科技园
+                        </address>
+                        <address><span class='glyphicon glyphicon-earphone'></span> <strong>联系电话：</strong>
+                            <a href='#'>(123) 456-7890</a>
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Begin page content -->
     <div class="container">
         <form id='form_id' class="for_ajax form-horizontal" role="form" method='post' action='/index/order_confirm'>
             <input class='hidden' name='user_id' value='<?php echo $user_id; ?>'>
             <input class='hidden' name='index' value='<?php echo $index; ?>'>
             <div class="page-header">
-                <h1>好佳订单<?php echo $html_left;?></h1>
-                <small>订餐时间：<strong><?php echo $start_order_time_am;?></strong>至<strong><?php echo $end_order_time_am;?></strong>, <strong><?php echo $start_order_time_pm;?></strong>至<strong><?php echo $end_order_time_pm;?></strong></small>
+                <h1>好佳订单<?php echo $html_left; ?></h1>
+                <small>订餐时间：<strong><?php echo $start_order_time_am; ?></strong>至<strong><?php echo $end_order_time_am; ?></strong>, <strong><?php echo $start_order_time_pm; ?></strong>至<strong><?php echo $end_order_time_pm; ?></strong></small>
             </div>
             <table class="table-striped" style='width:100%;max-width: 100%;margin-bottom: 20px;border-spacing: 0;'>
                 <thead>
