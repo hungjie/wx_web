@@ -45,7 +45,7 @@ if ($order_count <= 10) {
     </a>
 </div>
 
-<div id="demo" class="collapse">
+<!--<div id="demo" class="collapse">
     <img data-src="" style="width:100%" src="/image/head.jpg">
     <div class="row">
         <div class="col-xs-12">
@@ -65,7 +65,7 @@ if ($order_count <= 10) {
             </div>
         </div>
     </div>
-</div>
+</div>-->
 
 <div id="wrap">
     <!-- Begin page content -->
