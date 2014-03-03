@@ -47,30 +47,33 @@ if ($order_count <= 10) {
         </a>
     </div>
 
-    <div id="demo" class="collapse">
-        <div id="carousel-example-captions" class="carousel slide row" data-ride="carousel">
-            <ol class="carousel-indicators">
+    <div id="demo" class="collapse row">
+        <div id="carousel-example-captions" class="carousel slide" data-ride="carousel">
+<!--            <ol class="carousel-indicators">
                 <li data-target="#carousel-example-captions" data-slide-to="0" class="active"></li>
                 <li data-target="#carousel-example-captions" data-slide-to="1" class=""></li>
-            </ol>
+            </ol>-->
             <div class="carousel-inner">
                 <div class="item active">
-                    <img data-src="" alt="900x500" src="/image/head.jpg">
+                    <img data-src="" style="width:100%" src="/image/head.jpg">
                     <div class="carousel-caption">
                         <h3>Second slide label</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     </div>
                 </div>
                 <div class="item">
-                    <img data-src="" alt="900x500" src="/image/head.jpg">
+                    <img data-src="" style="width:100%" src="/image/head.jpg">
                     <div class="carousel-caption">
                         <h3>Third slide label</h3>
                         <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                     </div>
                 </div>
             </div>
+            <a class="left carousel-control" href="#demo" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+            <a class="right carousel-control" href="#demo" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
         </div>
-        <div class="row">
+        
+        <div class="">
             <div class="col-xs-12">
                 <div class="thumbnail">
                     <div class="caption">
