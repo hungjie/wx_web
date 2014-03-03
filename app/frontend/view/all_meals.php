@@ -69,8 +69,8 @@ if ($order_count <= 10) {
                     </div>
                 </div>
             </div>
-            <a class="left carousel-control" href="#demo" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-            <a class="right carousel-control" href="#demo" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+<!--            <a class="left carousel-control" href="#demo" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+            <a class="right carousel-control" href="#demo" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>-->
         </div>
         
         <div class="">
