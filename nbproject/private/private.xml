@@ -4,20 +4,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/code/wx_web/app/frontend/view/order_success.php</file>
             <file>file:/D:/code/wx_web/app/frontend/controller/indexController.php</file>
             <file>file:/D:/code/wx_web/app/frontend/core/mealCore.php</file>
             <file>file:/D:/code/wx_web/app/frontend/controller/orderController.php</file>
             <file>file:/D:/code/wx_web/app/frontend/controller/detailController.php</file>
             <file>file:/D:/code/wx_web/app/frontend/view/all_meals.php</file>
-            <file>file:/D:/code/wx_web/test_data.sql</file>
-            <file>file:/D:/code/wx_web/wx_sms.sql</file>
             <file>file:/D:/code/wx_web/app/frontend/core/systemCore.php</file>
             <file>file:/D:/code/wx_web/app/frontend/view/order_views.php</file>
+            <file>file:/D:/code/wx_web/web/theme/default/layout.php</file>
             <file>file:/D:/code/wx_web/app/frontend/view/order_meal_modal.php</file>
             <file>file:/D:/code/wx_web/web/c.php</file>
             <file>file:/D:/code/wx_web/app/frontend/view/cancel_order_success.php</file>
-            <file>file:/D:/code/wx_web/app/frontend/view/stop_order.php</file>
         </group>
     </open-files>
 </project-private>

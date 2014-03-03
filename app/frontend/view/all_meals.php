@@ -75,7 +75,7 @@ if ($order_count <= 10) {
                 <div class="caption">
                     <h3>店铺信息</h3>
                     <address><span class='glyphicon glyphicon-user'></span> <strong>名称：</strong>
-                        亨捷订餐
+                        好佳订餐
                     </address>
                     <address><span class='glyphicon glyphicon-cutlery'></span> <strong>地址：</strong>
                         湖里高科技园
@@ -96,7 +96,7 @@ if ($order_count <= 10) {
             <input class='hidden' name='user_id' value='<?php echo $user_id; ?>'>
             <input class='hidden' name='index' value='<?php echo $index; ?>'>
             <div class="page-header">
-                <h1>开心订单<?php echo $html_left;?></h1>
+                <h1>好佳订单<?php echo $html_left;?></h1>
                 <small>订餐时间：<strong><?php echo $start_order_time_am;?></strong>至<strong><?php echo $end_order_time_am;?></strong>, <strong><?php echo $start_order_time_pm;?></strong>至<strong><?php echo $end_order_time_pm;?></strong></small>
             </div>
             <table class="table-striped" style='width:100%;max-width: 100%;margin-bottom: 20px;border-spacing: 0;'>
