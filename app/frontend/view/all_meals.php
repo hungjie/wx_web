@@ -47,22 +47,24 @@ if ($order_count <= 10) {
     </div>
 </div>
 
-<div id="demo" class="collapse">
-    <img data-src="" style="width:100%" src="/image/head.jpg">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="thumbnail">
-                <div class="caption">
-                    <h3>店铺信息</h3>
-                    <address><span class='glyphicon glyphicon-user'></span> <strong>名称：</strong>
-                        好佳订餐
-                    </address>
-                    <address><span class='glyphicon glyphicon-cutlery'></span> <strong>地址：</strong>
-                        湖里高科技园
-                    </address>
-                    <address><span class='glyphicon glyphicon-earphone'></span> <strong>联系电话：</strong>
-                        <a href='#'>(123) 456-7890</a>
-                    </address>
+<div class="container">
+    <div id="demo"  class="collapse row">
+        <img data-src="" style="width:100%" src="/image/head.jpg">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h3>店铺信息</h3>
+                        <address><span class='glyphicon glyphicon-user'></span> <strong>名称：</strong>
+                            好佳订餐
+                        </address>
+                        <address><span class='glyphicon glyphicon-cutlery'></span> <strong>地址：</strong>
+                            湖里高科技园
+                        </address>
+                        <address><span class='glyphicon glyphicon-earphone'></span> <strong>联系电话：</strong>
+                            <a href='#'>(123) 456-7890</a>
+                        </address>
+                    </div>
                 </div>
             </div>
         </div>
