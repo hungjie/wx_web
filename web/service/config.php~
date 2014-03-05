@@ -1,0 +1,133 @@
+<?php
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+$config['db'] = array(
+    'host' => '127.0.0.1',
+    'db' => 'wx_sms',
+    'user' => 'root',
+    'password' => 'iloveu',
+    'charset' => ''
+);
+
+$config['shortcode_usm'] = 32666;
+$config['shortcode_min'] = 5100;
+$config['shortcode_menu_count'] = 0;
+
+define('MAIN_PATH', dirname(__FILE__));
+define('TOKEN', '1qazxsw23edcvfr4');
+define('APP_ID', 'wxf0ad189088f72222');
+define('APP_SECRET', '631032e80667b1aed3b9a43871084111');
+
+function geturl($url, $method = 'get', $header = null, $postdata = null, $new = false, $timeout = 15) {
+    $s = curl_init();
+
+    if ($header) {
+//            curl_setopt($s, CURLOPT_HEADER, true);
+        curl_setopt($s, CURLOPT_HTTPHEADER, $header);
+    }
+
+//        curl_setopt($s, CURLOPT_VERBOSE, TRUE);
+
+    curl_setopt($s, CURLOPT_TIMEOUT, $timeout);
+    curl_setopt($s, CURLOPT_CONNECTTIMEOUT, $timeout);
+    curl_setopt($s, CURLOPT_MAXREDIRS, 5);
+    curl_setopt($s, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($s, CURLOPT_FOLLOWLOCATION, true);
+
+    if (strtolower($method) == 'get') {
+        
+    } else if (strtolower($method) == 'post') {
+        curl_setopt($s, CURLOPT_POST, true);
+        curl_setopt($s, CURLOPT_POSTFIELDS, $postdata);
+    } else if (strtolower($method) == 'delete') {
+        curl_setopt($s, CURLOPT_POSTFIELDS, $postdata);
+        curl_setopt($s, CURLOPT_CUSTOMREQUEST, 'DELETE');
+    } else if (strtolower($method) == 'put') {
+        curl_setopt($s, CURLOPT_CUSTOMREQUEST, 'PUT');
+        curl_setopt($s, CURLOPT_POSTFIELDS, $postdata);
+    }
+
+    curl_setopt($s, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.3) Gecko/20100401'); //'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1');
+    curl_setopt($s, CURLOPT_SSL_VERIFYPEER, false);
+
+    curl_setopt($s, CURLOPT_URL, $url);
+
+    $html = curl_exec($s);
+//    $status = curl_getinfo($s/* , CURLINFO_HTTP_CODE */);
+//    //print_r($html);
+//    print_r($status);
+//    
+//    print_r(curl_error($s));
+
+    curl_close($s);
+    return $html;
+
+    //return array($html, $status);
+}
+
+function get_accesstoken(){
+    $content = file_get_contents('access_token.txt');
+    
+    if($content){
+        $contents = explode(',', $content);
+        if(time() - $contents[1] < 7200){
+            return $contents[0];
+        }
+    }
+    
+    $url = "https://api.weixin.qq.com/cgi-bin/token";
+    $paras = array();
+    $paras['grant_type'] = 'client_credential';
+    $paras['appid'] = APP_ID;
+    $paras['secret'] = APP_SECRET;
+    
+    $res = geturl($url."?".http_build_query($paras));
+    
+    if($res){
+        $res_json = json_decode($res);
+        
+        if($res_json && isset($res_json->access_token)){
+            file_put_contents('access_token.txt', $res_json->access_token . "," . time());
+            return $res_json->access_token;
+        }
+    }
+    
+    return false;
+}
+
+function checkSignature() {
+    $signature = $_GET["signature"];
+    $timestamp = $_GET["timestamp"];
+    $nonce = $_GET["nonce"];
+
+    $token = TOKEN;
+    $tmpArr = array($token, $timestamp, $nonce);
+    sort($tmpArr);
+    $tmpStr = implode($tmpArr);
+    $tmpStr = sha1($tmpStr);
+
+    if ($tmpStr == $signature) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function __error_log($msg, $path = '', $line = '') {
+    $logFile = date('Y-m-d') . '_error.txt';
+    $logFile = MAIN_PATH . '/log/' . $logFile;
+    $msg = $line . ':' . basename($path) . '(' . date('Y-m-d H:i:s') . ') >>> ' . $msg . "\r\n";
+    file_put_contents($logFile, $msg, FILE_APPEND);
+}
+
+function __info_log($msg, $path = '', $line = '') {
+    $logFile = date('Y-m-d') . '_info.txt';
+    $logFile = MAIN_PATH . '/log/' . $logFile;
+    $msg = $line . ':' . basename($path) . '(' . date('Y-m-d H:i:s') . ') >>> ' . $msg . "\r\n";
+    file_put_contents($logFile, $msg, FILE_APPEND);
+}
+
+?>
