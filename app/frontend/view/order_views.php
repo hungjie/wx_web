@@ -12,15 +12,15 @@ if ($data['orders']) {
         $all_total = '';
         $info = '';
         $id = '';
-        foreach ($order as $item => $desc) {
-            if ($item == 'address' || $item == 'date' || $item == 'id') {
-                continue;
-            }
+        foreach ($order['meal'] as $item => $desc) {
+//            if ($item == 'address' || $item == 'date' || $item == 'id') {
+//                continue;
+//            }
             
             $name = "<p class='text-left col-xs-6'>$item</p>";
             $count = "<p class='text-left col-xs-3'><strong>{$desc['count']}</strong>份</p>";
             $price = $desc['price'] * $desc['count'];
-            $all_total += $price;
+            //$all_total += $price;
             $total = "<p class='text-left col-xs-3'><strong>{$price}</strong>元</p>";
 
             $info .= "<div class='row'>$name $count $total</div><hr>";
@@ -32,10 +32,10 @@ if ($data['orders']) {
     <div class="thumbnail">
       <div class="caption">
         $info
-        <div class='row'><p class='text-right col-xs-12'>合计<strong>$all_total</strong>元</p></div>
+        <div class='row'><p class='text-right col-xs-12'>合计<strong>{$order['total_price']}</strong>元</p></div>
         <div class='row'><p class='text-left col-xs-12'>地址：<strong>{$order['address']}</strong></p></div>
         <div class='row'><p class='text-left col-xs-12'>时间：<strong>{$order['date']}</strong></p></div>
-        <p><a href="/order/cancel_order/{$data['user_id']}/{$order['id']}" class="btn btn-danger" role="button">取消订单</a></p>
+        <div class='row'><p class='col-xs-12'><a href="/order/cancel_order/{$data['user_id']}/{$order['id']}" class="btn col-xs-12 btn-danger" role="button">取消订单</a></p></div>
       </div>
     </div>
   </div>

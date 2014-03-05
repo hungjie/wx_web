@@ -12,10 +12,13 @@ class mealCore {
         $db = get_db();
         $db->begin_query();
 
-        $res = $db->table('meal_list')->order_by('id')->exec();
+        $day_num = date('w');
+        
+        $res = $db->table('meal_list')->where("status = 'all' or status='$day_num'")
+                ->order_by('id')->exec();
         $reses = array();
         while ($res && $res->next()) {
-            array_push($reses, $res->__data);
+            $reses[$res->id] = $res->__data;
         }
 
         return $reses;
@@ -28,17 +31,17 @@ class mealCore {
         $encode = json_encode($order);
 
         if ($id) {
-            $db->update(array('order_info' => $encode), array('id' => $id));
+            $db->update(array('id' => $id), array('order_info' => $encode));
 
             return $id;
         }
 
-        $order_id = $db->insert(array('user_id' => $msisdn, 'order_info' => $encode, 'time_at' => $now));
+        $order_id = $db->insert(array('user_id' => $msisdn, 'order_info' => $encode, 'time_at' => $now, 'total_price'=> $order['total_price'], 'total_count' => $order['total_count']));
 
         $db->__table = 'user_order_detail';
-        foreach ($order as $k => $v) {
-            if ($k == 'date' || $k == 'address' || !is_array($v))
-                continue;
+        foreach ($order['meal'] as $k => $v) {
+//            if ($k == 'date' || $k == 'address' || !is_array($v))
+//                continue;
             $db->insert(array('user_order_id' => $order_id, 'meal_name' => $k, 'count' => $v['count'], 'time_at' => $now));
         }
 
@@ -49,7 +52,7 @@ class mealCore {
         $db = get_db();
         $db->begin_query();
         $today_date = date("Y-m-d");
-        $res = $db->table('user_order')->where(array('user_id' => $msisdn, 'status' => 0))
+        $res = $db->table('user_order')->where(array('user_id' => $msisdn, 'status' => 1))
                 ->where("time_at > '$today_date'")
                 ->order_by_desc('id')
                 ->exec();

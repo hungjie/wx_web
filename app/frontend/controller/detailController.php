@@ -27,7 +27,7 @@ class detailController {
         foreach($res as $v){
             print $v['address'] . '<br/>' . $v['time_at'];
             $price = 0;
-            foreach ($v['order_info'] as $kk => $vv){
+            foreach ($v['order_info']['meal'] as $kk => $vv){
                 if (!is_array($vv)) continue;
                 print "<br/>";
                 print "$kk {$vv['count']} * {$vv['price']}";

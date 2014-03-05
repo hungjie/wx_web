@@ -9,15 +9,15 @@ $info = "";
 $all_total = 0;
 $user_id = $data['user_id'];
 $order_id = $data['order_id'];
-foreach ($data['order'] as $item => $desc) {
-    if ($item == 'address' || $item == 'date' || $item == 'id') {
-        continue;
-    }
+foreach ($data['order']['meal'] as $item => $desc) {
+//    if ($item == 'address' || $item == 'date' || $item == 'id') {
+//        continue;
+//    }
     
     $name = "<p class='text-left col-xs-6'>$item</p>";
     $count = "<p class='text-left col-xs-3'><strong>{$desc['count']}</strong>份</p>";
     $price = $desc['price']*$desc['count'];
-    $all_total += $price;
+//    $all_total += $price;
     $total = "<p class='text-left col-xs-3'><strong>{$price}</strong>元</p>";
     
     $info .= "<div class='row'>$name $count $total</div>";
@@ -25,7 +25,7 @@ foreach ($data['order'] as $item => $desc) {
 
 $addr_info = "<div class='row'><p class='text-left col-xs-12'>地址及联系信息：<strong>{$data['order']['address']}</strong></p></div>";
 
-$total_price_html = "<div class='row'><p class='text-right col-xs-12'>合计<strong>$all_total</strong>元</p></div>";
+$total_price_html = "<div class='row'><p class='text-right col-xs-12'>合计<strong>{$data['order']['total_price']}</strong>元</p></div>";
 ?>
 
 <div id="wrap">
@@ -44,7 +44,7 @@ $total_price_html = "<div class='row'><p class='text-right col-xs-12'>合计<str
             <input class='hidden' name='user_id' value='<?php echo $user_id; ?>'>
             <input class='hidden' name='order_id' value='<?php echo $order_id; ?>'>
             <div class="caption">
-                <button id="submit_modal" type='submit' class="btn btn-danger ">取消订单</button>
+                <button id="submit_modal" type='submit' class="btn col-xs-12 btn-danger ">取消订单</button>
 
             </div>
         </form>
