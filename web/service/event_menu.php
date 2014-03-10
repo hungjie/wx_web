@@ -41,10 +41,7 @@ class event_view_orders extends menu{
             $all_total = 0;
             $detail = '';
             $order = $orders[0];
-            foreach($order['order_info'] as $item=>$desc){
-                if($item == 'id' || $item == 'date' || $item =='address'){
-                    continue;
-                }
+            foreach($order['order_info']['meal'] as $item=>$desc){
                 $name = "$item";
                 $count = "{$desc['count']}份";
                 $price = $desc['price']*$desc['count'];
