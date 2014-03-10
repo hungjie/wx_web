@@ -75,7 +75,7 @@ class order_infos extends menu{
         $index = 1;
         foreach($meals as $meal){
             $menu = array('Title'=>$meal['name'],'Description'=>"价格{$meal['price']}元",
-                    'PicUrl'=>"{$meal['img_path']}",'Url'=>"http://115.29.15.140?msisdn={$msisdn}&index=$index");
+                    'PicUrl'=>"../{$meal['img_path']}",'Url'=>"http://115.29.15.140?msisdn={$msisdn}&index=$index");
                     
             $index++;
             
