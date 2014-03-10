@@ -81,10 +81,13 @@ class msisdnProcess {
         $db = get_db();
         $db->begin_query();
 
-        $res = $db->table('meal_list')->order_by('id')->exec();
+        $day_num = date('w');
+
+        $res = $db->table('meal_list')->where("status = 'all' or status='$day_num'")
+                        ->order_by('id')->exec();
         $reses = array();
         while ($res && $res->next()) {
-            array_push($reses, $res->__data);
+            $reses[$res->id] = $res->__data;
         }
 
         return $reses;
