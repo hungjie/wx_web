@@ -13,15 +13,15 @@ class msisdnProcess {
         $db = get_db();
         $db->begin_query();
         $today_date = date("Y-m-d");
-        $res = $db->table('user_order')->where(array('user_id' => $msisdn, 'status' => 0))
+        $res = $db->table('user_order')->where(array('user_id' => $msisdn, 'status > 0'))
                 ->where("time_at > '$today_date'")
                 ->order_by_desc('id')
                 ->exec();
 
         $reses = array();
         while ($res && $res->next()) {
-            $order_info = json_decode($res->__data['order_info'], true);
-            $order_info['id'] = $res->__data['id'];
+            $order_info = $res->__data;
+            $order_info['order_info'] = json_decode($res->__data['order_info'], true);
             array_push($reses, $order_info);
         }
 
@@ -110,7 +110,7 @@ class msisdnProcess {
 
         try {
             if ($res && $res->next()) {
-                $db->update(array('user_id'=>$id), array('status'=>1));
+                $db->update(array('user_id' => $id), array('status' => 1));
             } else {
                 $db->insert(array('user_id' => $id));
             }
