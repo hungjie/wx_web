@@ -78,6 +78,10 @@ class order_infos extends menu{
                     'PicUrl'=>'','Url'=>"http://115.29.15.140?msisdn={$msisdn}&index=$index");
                     
             $index++;
+            
+            if($index == 10){
+                break;
+            }
                     
             array_push($menu_str, $menu);
         }
