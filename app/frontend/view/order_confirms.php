@@ -26,10 +26,10 @@ if ($data['orders']) {
 
         if ($order['status'] == 1) {
             $cancel_html = <<<CAN
-        <div class='row'><p class='col-xs-12'><a href="/order/cancel_order/{$data['user_id']}/{$order['id']}" class="btn col-xs-12 btn-danger" role="button">取消订单</a></p></div>
+        <div class='row'><p class='col-xs-12'><a href="/detail/confirm_order/{$order['id']}" class="btn col-xs-12 btn-danger" role="button">确认订单</a></p></div>
 CAN;
-        } else if ($order['status'] == 2){
-           $cancel_html = <<<CAN
+        } else if ($order['status'] == 2) {
+            $cancel_html = <<<CAN
         <div class='row'><p class='col-xs-12'>订单已确认配送</p></div>
 CAN;
         }
@@ -58,7 +58,7 @@ eto;
   <div class="col-sm-6 col-xs-12">
     <div class="thumbnail">
       <div class="caption">
-        <h3>您还没有订单！</h3>
+        <h3>还没有订单！</h3>
       </div>
     </div>
   </div>
@@ -66,15 +66,17 @@ eto;
 eto;
 }
 
-$t = <<<eto
-<form id='form_id' class="form-horizontal" role="form" action="/order/cancel_order" method='post'>
-            <input class='hidden' name='user_id' value='{$data['user_id']}'>
-            <input class='hidden' name='id' value='{$order['id']}'>
-            <div class="form-group">
-                <button id="submit_modal" type='submit' class="btn btn-danger">取消订单</button>
-            </div>
-            </form>
-eto;
+$js =<<<JS
+    $('#for_ajax_div').click(function(event){
+        var ev = event.target || event.srcElement;
+        if (ev.tagName == 'A'){
+            url = $(ev).attr('href');
+            $('#for_ajax_div').load(url);
+            return false;
+        }
+    });
+JS;
+$config['dom_ready'][] = $js;
 ?>
 
 <div id="wrap">
@@ -84,13 +86,7 @@ eto;
         <div class="page-header">
             <h1>订单列表</h1>
         </div>
-<?php echo $infos; ?>
+        <?php echo $infos; ?>
     </div>
 </div>
-<script>
-    $('a').click(function(){
-        url = $(this).attr('href');
-        $('#for_ajax_div').load(url);
-        return false;
-    });
-</script>
+

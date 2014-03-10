@@ -25,7 +25,7 @@ if($count > 0){
             <div class="thumbnail">
                 <div class="caption">
                     <h4>您错过了今天的订餐时间</h4>
-                        <p>订餐时间为: <strong><?php echo $start_am;?></strong>至<strong><?php echo $end_am;?></strong>, <strong><?php echo $start_pm;?></strong>至<strong><?php echo $end_pm;?></strong></p>
+                        <p>订餐时间为: <strong><?php echo $start_am;?></strong>至<strong><?php echo $end_am;?></strong><?php if($start_pm){ ?>, <strong><?php echo $start_pm;?></strong>至<strong><?php echo $end_pm;?></strong><?php } ?></p>
                 </div>
             </div>
         </div>

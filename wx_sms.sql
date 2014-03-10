@@ -151,9 +151,9 @@ CREATE TABLE IF NOT EXISTS `system_config` (
 
 INSERT INTO `system_config` VALUES
 ('start_am', '09:00'), 
-('end_am', '10:50'), 
-('start_pm', '14:30'), 
-('end_pm', '19:50'),
+('end_am', '23:50'), 
+-- ('start_pm', '14:30'), 
+-- ('end_pm', '19:50'),
 ('meal_count', '200');
 
 -- --------------------------------------------------------

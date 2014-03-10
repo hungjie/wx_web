@@ -116,6 +116,7 @@ class indexController {
         }
 
         $order['total_count'] = $total_count;
+        $total_price -= (int)($total_count / 10) * 10; 
         $order['total_price'] = $total_price;
 
         $order_Ymd = date('YmdA');
