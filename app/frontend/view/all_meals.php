@@ -106,7 +106,7 @@ if ($order_count <= 10) {
                             <div class="form-group">
                                 <label for="inputaddress" class="control-label">地址：</label>
                                 <div class="">
-                                    <input type="text" class="form-control" id="inputaddress" name='inputaddress' placeholder="现在支持厦门软件二期片区，请填写楼栋信息。">
+                                    <input type="text" class="form-control" id="inputaddress" name='inputaddress' placeholder="只支持湖里高新技术园片区，请填写楼栋信息。">
                                 </div>
                             </div>
                             <div class="form-group">
