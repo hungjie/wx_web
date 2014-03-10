@@ -76,8 +76,8 @@ if ($order_count <= 10) {
             <input class='hidden' name='user_id' value='<?php echo $user_id; ?>'>
             <input class='hidden' name='index' value='<?php echo $index; ?>'>
             <div class="page-header">
-                <h1>好佳订单<?php echo $html_left; ?></h1>
-                <small>订餐时间：<strong><?php echo $start_order_time_am; ?></strong>至<strong><?php echo $end_order_time_am; ?></strong>, <strong><?php echo $start_order_time_pm; ?></strong>至<strong><?php echo $end_order_time_pm; ?></strong></small>
+                <h1>好佳订单(10份起送)<?php echo $html_left; ?></h1>
+                <small>订餐时间：<strong><?php echo $start_order_time_am; ?></strong>至<strong><?php echo $end_order_time_am; ?></strong><?php if ($start_order_time_pm){ ?>, <strong><?php echo $start_order_time_pm; ?></strong>至<strong><?php echo $end_order_time_pm; ?></strong><?php } ?></small>
             </div>
             <table class="table-striped" style='width:100%;max-width: 100%;margin-bottom: 20px;border-spacing: 0;'>
                 <thead>
@@ -128,7 +128,7 @@ if ($order_count <= 10) {
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class=" control-label">合计：</label>
+                                <label class=" control-label">合计(满10份减10元)：</label>
                                 <div class="">
                                     <strong id='total_price' class="form-control-static">0</strong>元
                                 </div>
@@ -137,7 +137,7 @@ if ($order_count <= 10) {
                     </tr>
                     <tr><td colspan="3" class='col-xs-12'>
                             <div class="form-group ">
-                                <button id="submit_modal" type='submit' class="btn col-xs-12 btn-primary">提交订单</button>
+                                <button id="submit_modal" type='submit' class="btn col-xs-12 btn-primary" disabled="disabled">提交订单</button>
                             </div>
                         </td>
                     </tr>
@@ -266,6 +266,8 @@ function comulate_total(){
         var index = $index;
         var total_price = 0.00;
         
+        var total_count = 0;
+        
         var i=1;
         for(;i < index;i++){
             var price = $("#count_id"+i).attr('price');
@@ -273,9 +275,17 @@ function comulate_total(){
             if( isNaN(count) || count < 0){
                 count = 0;
             }
+            
+            total_count += parseInt(count);
         
             total_price = total_price + parseFloat(price) * parseInt(count);
         }
+        
+        if (total_count >= 10){
+            $('#submit_modal').attr('disabled', false);
+            total_price -= parseInt(total_count / 10) * 10;
+        }
+        else $('#submit_modal').attr('disabled', true);
         
         $('#total_price').text(total_price);
 }
