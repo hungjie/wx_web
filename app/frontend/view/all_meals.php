@@ -58,10 +58,10 @@ if ($order_count <= 10) {
                         好佳订餐
                     </address>
                     <address><span class='glyphicon glyphicon-cutlery'></span> <strong>地址：</strong>
-                        湖里高科技园
+                        湖里高新技术园
                     </address>
                     <address><span class='glyphicon glyphicon-earphone'></span> <strong>联系电话：</strong>
-                        <a href='#'>(123) 456-7890</a>
+                        <a href='tel:18030309418'>18030309418</a>
                     </address>
                 </div>
             </div>
@@ -100,7 +100,7 @@ if ($order_count <= 10) {
                             <div class="form-group">
                                 <label for="inputarea" class="control-label">片区：</label>
                                 <select name='inputarea' id="inputarea" class="form-control">
-                                    <option value='厦门软件园二期'>厦门软件园二期</option>
+                                    <option value='厦门湖里高新技术园'>厦门湖里高新技术园</option>
                                 </select>
                             </div>
                             <div class="form-group">
