@@ -40,17 +40,17 @@ class event_view_orders extends menu{
         if(count($orders) > 0){
             $all_total = 0;
             $detail = '';
-            foreach($orders[0] as $item=>$desc){
-                if ($item == 'address' || $item == 'date' || $item == 'id') {
+            $order = $orders[0];
+            foreach($order['order_info'] as $item=>$desc){
+                if($item == 'id' || $item == 'date' || $item =='address'){
                     continue;
                 }
-                
                 $name = "$item";
                 $count = "{$desc['count']}份";
                 $price = $desc['price']*$desc['count'];
                 $all_total += $price;
                 $total = "{$price}元";
-                
+
                 $detail .= "$name 您订了 $count 单价为{$desc['price']}\n";
             }
             
