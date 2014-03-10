@@ -51,7 +51,7 @@ class event_view_orders extends menu{
                 $detail .= "$name 您订了 $count 单价为{$desc['price']}\n";
             }
             
-            array_push($menu_str,array('Title'=>"查看您的订单记录",'Description'=>"{$orders[0]['date']} \n$detail \n订单总价为 {$all_total} 元",
+            array_push($menu_str,array('Title'=>"查看您的订单记录",'Description'=>"{$order['date']} \n$detail \n订单总价为 {$all_total} 元",
                     'PicUrl'=>'','Url'=>"http://115.29.15.140/order/view/$msisdn") );
         }else{
             array_push($menu_str,array('Title'=>"查看您的订单记录",'Description'=>"订单总价为 0 元\n订单数量为 0 单\n",
